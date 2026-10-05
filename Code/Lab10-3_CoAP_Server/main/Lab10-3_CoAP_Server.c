@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "esp_log.h"
+#include "esp_system.h"
 #include "nvs_flash.h"
 #include "esp_netif.h"
 #include "esp_event.h"
@@ -207,9 +208,12 @@ void app_main(void)
 
     // 4. Connect Wi-Fi
     if (wifi_init_sta()) {
+        ESP_LOGI(TAG, "[HEAP] Baseline (Wi-Fi connected, server not started): %lu bytes", (unsigned long)esp_get_free_heap_size());
         // 5. Create CoAP Server Task (ใช้ Stack Size 8192 ไบต์)
         xTaskCreate(coap_server_task, "coap_server", 8192, NULL, 5, NULL);
         ESP_LOGI(TAG, "Ready! Test CoAP with: python test_coap.py");
+        vTaskDelay(pdMS_TO_TICKS(2000));
+        ESP_LOGI(TAG, "[HEAP] After CoAP server running: %lu bytes", (unsigned long)esp_get_free_heap_size());
     } else {
         ESP_LOGE(TAG, "Wi-Fi connection failed.");
     }

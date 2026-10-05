@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "esp_log.h"
+#include "esp_system.h"
 #include "nvs_flash.h"
 #include "esp_netif.h"
 #include "esp_event.h"
@@ -250,9 +251,12 @@ void app_main(void)
 
     // 6. เชื่อมต่อระบบ Wi-Fi
     if (wifi_init_sta()) {
+        ESP_LOGI(TAG, "[HEAP] Baseline (Wi-Fi connected, server not started): %lu bytes", (unsigned long)esp_get_free_heap_size());
         // 7. เริ่มต้น HTTP RESTful Web Server
         s_http_server = start_webserver();
         ESP_LOGI(TAG, "Ready! Test with: curl.exe http://esp32-node.local/api/status");
+        vTaskDelay(pdMS_TO_TICKS(2000));
+        ESP_LOGI(TAG, "[HEAP] After HTTP server running: %lu bytes", (unsigned long)esp_get_free_heap_size());
     } else {
         ESP_LOGE(TAG, "Cannot start server due to Wi-Fi connection failure.");
     }
