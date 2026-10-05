@@ -16,8 +16,8 @@
 #define TAG "UDP_LAB"
 
 // กำหนดชื่อและรหัสผ่าน Wi-Fi
-#define CONFIG_WIFI_SSID      "Bismarck ."
-#define CONFIG_WIFI_PASSWORD  "jobshare"
+#define CONFIG_WIFI_SSID      "YOUR_WIFI_SSID"
+#define CONFIG_WIFI_PASSWORD  "YOUR_WIFI_PASSWORD"
 #define MAXIMUM_RETRY         5
 
 #define LED_GPIO_PIN          GPIO_NUM_2
