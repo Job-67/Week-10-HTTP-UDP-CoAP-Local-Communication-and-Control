@@ -15,6 +15,16 @@
 | เวอร์ชันคอมโพเนนต์ `espressif/coap` | 4.3.5~8 (libcoap v4.3.x) |
 | Stack Size ของ `coap_server_task` | 8192 ไบต์ |
 
+**ผลการบูตของ ESP32 (ESP-IDF v6.1, โปรเจกต์ `Lab10-3_CoAP_Server`)**
+
+![Boot log ของ ESP32 แสดงเวอร์ชัน ESP-IDF v6.1 และชื่อโปรเจกต์ Lab10-3_CoAP_Server](Image/10-3_boot_log_start.png)
+
+**ผลการเชื่อมต่อ Wi-Fi และการรับคำขอ CoAP บน Serial Monitor**
+
+![Serial Monitor แสดง IP 10.131.32.203, CoAP Server พอร์ต 5683 และ log การรับ GET/PUT](Image/10-3_monitor_coap_requests.png)
+
+> ESP32 เชื่อมต่อ Wi-Fi `Bismarck .` สำเร็จ (RSSI −47 dBm, WPA2-PSK) ได้ IP `10.131.32.203` จากนั้นเริ่ม CoAP Server ที่พอร์ต UDP 5683 และพิมพ์ log ทุกครั้งที่ได้รับ `GET /sensor/pot` (ค่า `0`) และ `PUT /actuator/led` (เปิด/ปิด)
+
 ---
 
 ## ส่วนที่ 1 บันทึกผลการทดลอง (กิจกรรมที่ 10-3.5)
